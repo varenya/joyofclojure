@@ -4,19 +4,14 @@
   (-> "http://www.joyofclojure.com/hello" URL.
       .openStream
       InputStreamReader.
-      BufferedReader.)
-  )
+      BufferedReader.))
 
 (defmacro with-resource [binding close-fn & body]
   `(let ~binding
      (try
        (do ~@body)
        (finally
-         (~close-fn ~(binding 0))
-         )
-       )
-     )
-  )
+         (~close-fn ~(binding 0))))))
 
 
 

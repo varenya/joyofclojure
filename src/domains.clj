@@ -20,18 +20,12 @@
      :attrs (grok-attrs (take-while (comp not vector?) t)),
      :content (if-let [c (grok-props (drop-while (comp not vector?) t))] [c] [])}))
 
-
 (defmacro grouping [name & body]
   `{:tag :grouping, :attrs {:name (str '~name)} , :content [~@(handle-things body)]})
-
 
 (def d
   (domain man-vs-monster
           (grouping people (Human "A stock human")
-                    (Man (isa Human) "A man, baby" [name] [has-beard?])
-                    )
+                    (Man (isa Human) "A man, baby" [name] [has-beard?]))
           (grouping monsters
-                    (Chupacapbra "A fierce, yet elusive creature" [eats-goats?])
-                    )
-          )
-  )
+                    (Chupacapbra "A fierce, yet elusive creature" [eats-goats?]))))
